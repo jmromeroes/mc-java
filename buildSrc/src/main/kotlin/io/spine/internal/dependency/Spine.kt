@@ -38,8 +38,8 @@ import org.gradle.kotlin.dsl.extra
  */
 class Spine(p: ExtensionAware) {
 
-    val base = "io.spine:spine-base:${p.spineVersion}"
-    val testlib = "io.spine.tools:spine-testlib:${p.spineVersion}"
+    val base = "io.spine:spine-base:${p.baseVersion}"
+    val testlib = "io.spine.tools:spine-testlib:${p.baseVersion}"
 
     val toolBase = "io.spine.tools:spine-tool-base:${p.toolBaseVersion}"
     val pluginBase = "io.spine.tools:spine-plugin-base:${p.toolBaseVersion}"
@@ -49,7 +49,7 @@ class Spine(p: ExtensionAware) {
 
     val validation = Validation(p)
 
-    private val ExtensionAware.spineVersion: String
+    private val ExtensionAware.baseVersion: String
         get() = extra["baseVersion"] as String
     private val ExtensionAware.mcVersion: String
         get() = extra["mcVersion"] as String

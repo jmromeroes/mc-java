@@ -36,7 +36,7 @@ import io.spine.internal.gradle.forceVersions
 import io.spine.internal.gradle.javac.configureErrorProne
 import io.spine.internal.gradle.javac.configureJavac
 import io.spine.internal.gradle.publish.PublishingRepos.gitHub
-import io.spine.internal.gradle.test.configureLogging
+import io.spine.internal.gradle.testing.configureLogging
 
 buildscript {
 
