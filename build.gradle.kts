@@ -58,8 +58,8 @@ import io.spine.internal.gradle.publish.spinePublishing
 import io.spine.internal.gradle.report.coverage.JacocoConfig
 import io.spine.internal.gradle.report.license.LicenseReporter
 import io.spine.internal.gradle.report.pom.PomGenerator
-import io.spine.internal.gradle.test.configureLogging
-import io.spine.internal.gradle.test.registerTestTasks
+import io.spine.internal.gradle.testing.configureLogging
+import io.spine.internal.gradle.testing.registerTestTasks
 import io.spine.internal.gradle.testing.exposeTestArtifacts
 import java.time.Duration
 import java.util.*
@@ -137,6 +137,7 @@ subprojects {
     }
 
     val baseVersion: String by extra
+    val coreVersion: String by extra
     val toolBaseVersion: String by extra
     with(configurations) {
         forceVersions()
@@ -145,6 +146,7 @@ subprojects {
             resolutionStrategy {
                 force(
                     "io.spine:spine-base:$baseVersion",
+                    "io.spine:spine-server:$coreVersion",
                     "io.spine.tools:spine-testlib:$baseVersion",
                     "io.spine.tools:spine-tool-base:$toolBaseVersion",
                     "io.spine.tools:spine-plugin-base:$toolBaseVersion"
@@ -179,9 +181,7 @@ subprojects {
     tasks {
         registerTestTasks()
         test {
-            useJUnitPlatform {
-                includeEngines("junit-jupiter")
-            }
+            useJUnitPlatform()
             configureLogging()
         }
     }
