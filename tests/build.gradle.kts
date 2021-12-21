@@ -60,6 +60,7 @@ buildscript {
     }
 
     val baseVersion: String by extra
+    val coreVersion: String by extra
     val toolBaseVersion: String by extra
     with(configurations) {
         io.spine.internal.gradle.doForceVersions(this)
@@ -67,6 +68,7 @@ buildscript {
             resolutionStrategy {
                 force(
                     "io.spine:spine-base:$baseVersion",
+                    "io.spine:spine-server:$coreVersion",
                     "io.spine.tools:spine-tool-base:$toolBaseVersion",
                     "io.spine.tools:spine-plugin-base:$toolBaseVersion"
                 )
@@ -133,6 +135,7 @@ subprojects {
         testRuntimeOnly(JUnit.runner)
     }
 
+    val coreVersion: String by extra
     val toolBaseVersion: String by extra
     with(configurations) {
         forceVersions()
@@ -141,6 +144,7 @@ subprojects {
             resolutionStrategy {
                 force(
                     "io.spine:spine-base:$baseVersion",
+                    "io.spine:spine-server:$coreVersion",
                     "io.spine.tools:spine-testlib:$baseVersion",
                     "io.spine.tools:spine-tool-base:$toolBaseVersion",
                     "io.spine.tools:spine-plugin-base:$toolBaseVersion"
