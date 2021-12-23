@@ -86,7 +86,7 @@ public final class McJavaChecksSeverity implements Logging {
      */
     private void configureCheckSeverity() {
         if (!hasErrorPronePlugin()) {
-            _error().log("Cannot configure Spine Java Checks severity as the Error Prone " +
+            _debug().log("Spine Java Checks severity is not configured because the Error Prone " +
                                  "plugin is not applied to the project `%s`.", project.getName());
             return;
         }
