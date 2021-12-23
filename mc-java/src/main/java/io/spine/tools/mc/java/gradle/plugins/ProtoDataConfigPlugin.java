@@ -29,6 +29,7 @@ package io.spine.tools.mc.java.gradle.plugins;
 import io.spine.logging.Logging;
 import io.spine.protodata.gradle.Extension;
 import io.spine.protodata.gradle.LaunchProtoData;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -60,19 +61,34 @@ final class ProtoDataConfigPlugin implements Plugin<Project>, Logging {
     private static final String PROTO_DATA_ID = "io.spine.proto-data";
     private static final String CONFIG_SUBDIR = "protodata-config";
 
+    private final boolean validationDisabled = isValidationDisabled();
+    private final boolean validationEnabled = !validationDisabled;
+
+    private @MonotonicNonNull Project project;
+    private @MonotonicNonNull Extension ext;
+
     @Override
     public void apply(Project target) {
-        var validationDisabled = isValidationDisabled();
         if (validationDisabled) {
             _warn().log("The Spine Validation has been disabled via the system property.");
         }
+        applyProtoDataPluginTo(target);
+        addValidationRenderers();
+        addOptions();
+        addValidationDependencies();
+        addTasks();
+    }
 
+    private void applyProtoDataPluginTo(Project target) {
+        this.project = target;
         target.getPluginManager()
               .apply(PROTO_DATA_ID);
-        var ext = target.getExtensions()
-                        .getByType(Extension.class);
+        this.ext = target.getExtensions()
+                         .getByType(Extension.class);
+    }
 
-        if (!validationDisabled) {
+    private void addValidationRenderers() {
+        if (validationEnabled) {
             ext.renderers(
                     "io.spine.validation.java.PrintValidationInsertionPoints",
                     "io.spine.validation.java.JavaValidationRenderer"
@@ -81,25 +97,32 @@ final class ProtoDataConfigPlugin implements Plugin<Project>, Logging {
                     "io.spine.validation.ValidationPlugin"
             );
         }
+    }
+
+    private void addOptions() {
         ext.options(
                 "spine/options.proto",
                 "spine/time_options.proto"
         );
+    }
 
-        if (!validationDisabled) {
-            var dependencies = target.getDependencies();
+    private void addValidationDependencies() {
+        if (validationEnabled) {
+            var dependencies = project.getDependencies();
             dependencies.add("protoData", validationJava().notation());
             dependencies.add("implementation", validationRuntime().notation());
         }
+    }
 
-        var tasks = target.getTasks();
+    private void addTasks() {
+        var tasks = project.getTasks();
         tasks.withType(LaunchProtoData.class, task -> {
             var name = task.getName();
             var taskName = format("writeConfigFor_%s", name);
             var configTask = tasks.create(
                     taskName,
                     GenerateProtoDataConfig.class,
-                    t -> linkConfigFile(target, task, t)
+                    t -> linkConfigFile(project, task, t)
             );
             task.dependsOn(configTask);
         });
