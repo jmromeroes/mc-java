@@ -32,7 +32,6 @@ import io.spine.annotation.SPI;
 import io.spine.code.proto.FileName;
 import io.spine.code.proto.FileSet;
 import io.spine.testing.TempDir;
-import io.spine.tools.code.SourceSetName;
 import io.spine.tools.gradle.testing.GradleProject;
 import io.spine.tools.java.fs.DefaultJavaPaths;
 import io.spine.tools.java.fs.SourceFile;
