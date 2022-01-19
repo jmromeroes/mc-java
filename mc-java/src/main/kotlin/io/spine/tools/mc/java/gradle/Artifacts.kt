@@ -76,7 +76,8 @@ internal val spineProtocPlugin: Artifact by lazy {
 
 private const val VALIDATION_GROUP = "io.spine.validation"
 
-private val validationJavaDependency = ThirdPartyDependency(VALIDATION_GROUP, "java")
+private val validationJavaDependency =
+    ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java")
 
 private val validationVersion: String by lazy {
     versions.versionOf(validationJavaDependency).orElseThrow()
@@ -94,7 +95,7 @@ internal val validationJava: Artifact by lazy {
 @get:JvmName("validationRuntime")
 internal val validationRuntime: Artifact by lazy {
     Artifact.newBuilder()
-        .setName("runtime")
+        .setName("spine-validation-runtime")
         .setGroup(VALIDATION_GROUP)
         .setVersion(validationVersion)
         .build()
