@@ -27,6 +27,7 @@
 @file:Suppress("RemoveRedundantQualifierName") // To prevent IDEA replacing FQN imports.
 
 import io.spine.internal.dependency.ErrorProne
+import io.spine.internal.dependency.Flogger
 import io.spine.internal.dependency.JUnit
 import io.spine.internal.dependency.Protobuf
 import io.spine.internal.dependency.Truth
@@ -140,6 +141,9 @@ subprojects {
         all {
             resolutionStrategy {
                 force(
+                    Flogger.lib,
+                    Flogger.Runtime.systemBackend,
+
                     "io.spine:spine-base:$baseVersion",
                     "io.spine.tools:spine-testlib:$baseVersion",
                     "io.spine.tools:spine-tool-base:$toolBaseVersion",

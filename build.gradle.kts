@@ -32,6 +32,7 @@ import com.google.protobuf.gradle.protoc
 import io.spine.internal.dependency.CheckerFramework
 import io.spine.internal.dependency.ErrorProne
 import io.spine.internal.dependency.FindBugs
+import io.spine.internal.dependency.Flogger
 import io.spine.internal.dependency.Grpc
 import io.spine.internal.dependency.Guava
 import io.spine.internal.dependency.JUnit
@@ -144,6 +145,9 @@ subprojects {
         all {
             resolutionStrategy {
                 force(
+                    Flogger.lib,
+                    Flogger.Runtime.systemBackend,
+
                     "io.spine:spine-base:$baseVersion",
                     "io.spine.tools:spine-testlib:$baseVersion",
                     "io.spine.tools:spine-tool-base:$toolBaseVersion",
@@ -242,10 +246,6 @@ subprojects {
         )
         plugins(
             "io.spine.validation.ValidationPlugin"
-        )
-        options(
-            "spine/options.proto",
-            "spine/time_options.proto"
         )
     }
 }
