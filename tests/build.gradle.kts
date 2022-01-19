@@ -126,7 +126,6 @@ subprojects {
 
     dependencies {
         errorprone(ErrorProne.core)
-        errorproneJavac(ErrorProne.javacPlugin)
         ErrorProne.annotations.forEach { compileOnly(it) }
         implementation("io.spine:spine-base:$baseVersion")
         testImplementation("io.spine.tools:spine-testlib:$baseVersion")
