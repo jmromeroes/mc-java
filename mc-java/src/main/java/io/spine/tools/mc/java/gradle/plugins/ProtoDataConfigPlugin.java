@@ -63,10 +63,6 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
         ext.plugins(
                 "io.spine.validation.ValidationPlugin"
         );
-        ext.options(
-                "spine/options.proto",
-                "spine/time_options.proto"
-        );
 
         var dependencies = target.getDependencies();
         dependencies.add("protoData", validationJava().notation());
