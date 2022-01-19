@@ -39,7 +39,6 @@ import io.spine.internal.dependency.JUnit
 import io.spine.internal.dependency.Protobuf
 import io.spine.internal.dependency.Spine
 import io.spine.internal.dependency.Truth
-import io.spine.internal.gradle.IncrementGuard
 import io.spine.internal.gradle.RunBuild
 import io.spine.internal.gradle.VersionWriter
 import io.spine.internal.gradle.applyStandard
@@ -51,6 +50,7 @@ import io.spine.internal.gradle.javac.configureJavac
 import io.spine.internal.gradle.javadoc.JavadocConfig
 import io.spine.internal.gradle.kotlin.applyJvmToolchain
 import io.spine.internal.gradle.kotlin.setFreeCompilerArgs
+import io.spine.internal.gradle.publish.IncrementGuard
 import io.spine.internal.gradle.publish.Publish.Companion.publishProtoArtifact
 import io.spine.internal.gradle.publish.PublishExtension
 import io.spine.internal.gradle.publish.PublishingRepos
