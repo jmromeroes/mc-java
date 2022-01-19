@@ -67,7 +67,7 @@ private object ErrorProneConfig {
         listOf(
 
             // Exclude generated sources from being analyzed by ErrorProne.
-            "-XepExcludedPaths:.*/generated/.*",
+            "-XepExcludedPaths:.*/generated.*/.*",
 
             // Turn the check off until ErrorProne can handle `@Nested` JUnit classes.
             // See issue: https://github.com/google/error-prone/issues/956
