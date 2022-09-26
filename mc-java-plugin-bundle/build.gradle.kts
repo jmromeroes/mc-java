@@ -79,7 +79,7 @@ publishing {
              *     <dependency>
              *         <groupId>io.spine</groupId>
              *         <artifactId>protodata</artifactId>
-             *         <version>0.2.7</version>
+             *         <version>0.2.8</version>
              *         <scope>runtime</scope>
              *    </dependency>
              * ```
@@ -89,8 +89,8 @@ publishing {
 
                 val dependencies = Node(projectNode, "dependencies")
                 val dependency = Node(dependencies, "dependency")
-                Node(dependency, "groupId", "io.spine")
-                Node(dependency, "artifactId", "protodata")
+                Node(dependency, "groupId", "io.spine.protodata")
+                Node(dependency, "artifactId", "gradle-plugin")
                 Node(dependency, "version", protoDataVersion)
                 Node(dependency, "scope", "runtime")
             }

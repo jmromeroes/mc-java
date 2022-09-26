@@ -55,7 +55,7 @@ dependencies {
     implementation(project(":mc-java-rejection"))
     implementation(project(":mc-java-protodata-params"))
 
-    implementation("io.spine:protodata:$protoDataVersion")
+    implementation("io.spine.protodata:gradle-plugin:$protoDataVersion")
     implementation("io.spine.protodata:protodata-compiler:$protoDataVersion")
     implementation(validation.config)
 
