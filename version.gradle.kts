@@ -39,5 +39,5 @@ val serverVersion by extra("2.0.0-SNAPSHOT.100")
 val validationVersion by extra("2.0.0-SNAPSHOT.23")
 val protoDataVersion by extra("0.2.8")
 
-val mcJavaVersion by extra("2.0.0-SNAPSHOT.97")
+val mcJavaVersion by extra("2.0.0-SNAPSHOT.98")
 val versionToPublish by extra(mcJavaVersion)
