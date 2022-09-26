@@ -89,8 +89,8 @@ publishing {
 
                 val dependencies = Node(projectNode, "dependencies")
                 val dependency = Node(dependencies, "dependency")
-                Node(dependency, "groupId", "io.spine.protodata")
-                Node(dependency, "artifactId", "gradle-plugin")
+                Node(dependency, "groupId", "io.spine")
+                Node(dependency, "artifactId", "protodata")
                 Node(dependency, "version", protoDataVersion)
                 Node(dependency, "scope", "runtime")
             }
