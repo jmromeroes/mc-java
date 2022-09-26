@@ -26,8 +26,10 @@
 
 package io.spine.tools.mc.java.gradle.plugins;
 
+import com.google.common.collect.ImmutableList;
 import io.spine.protodata.gradle.CodegenSettings;
 import io.spine.protodata.gradle.plugin.LaunchProtoData;
+import io.spine.tools.mc.java.gradle.Projects;
 import io.spine.tools.mc.java.protodata.params.DefaultOptionsProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -115,6 +117,10 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
                 "io.spine.validation.ValidationPlugin"
         );
         ext.optionProviders(DefaultOptionsProvider.class.getName());
+        ext.setSubDirs(ImmutableList.of(
+                Projects.getGeneratedJavaDirName().value(),
+                Projects.getGeneratedRejectionsDirName().value()
+        ));
 
         var dependencies = target.getDependencies();
         dependencies.add(PROTODATA_CONFIGURATION, validationJava().notation());
