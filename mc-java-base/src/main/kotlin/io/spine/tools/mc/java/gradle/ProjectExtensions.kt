@@ -29,12 +29,12 @@
 package io.spine.tools.mc.java.gradle
 
 import com.google.protobuf.gradle.ProtobufConvention
+import io.spine.tools.code.SourceSetName
 import io.spine.tools.fs.DirectoryName
 import io.spine.tools.fs.DirectoryName.grpc
 import io.spine.tools.fs.DirectoryName.java
 import io.spine.tools.fs.DirectoryName.spine
 import io.spine.tools.gradle.ProtobufDependencies
-import io.spine.tools.code.SourceSetName
 import io.spine.tools.gradle.project.sourceSet
 import io.spine.tools.java.fs.DefaultJavaPaths
 import io.spine.tools.mc.gradle.modelCompiler
@@ -78,25 +78,41 @@ public fun Project.protoFiles(ssn: SourceSetName): FileCollection? {
 public val Project.generatedDir: Path
     get() = Path(the<ProtobufConvention>().protobuf.generatedFilesBaseDir)
 
-private fun Project.generated(ss: SourceSetName): Path {
-    return generatedDir.resolve(ss.value)
-}
+/**
+ * The short name of the directory containing generated Java source code.
+ */
+public val generatedJavaDirName: DirectoryName = java
+
+/**
+ * The short name of the directory containing generated gRPC source code.
+ */
+public val generatedGrpcDirName: DirectoryName = grpc
+
+/**
+ * The short name of the directory containing generated rejections source code.
+ */
+public val generatedRejectionsDirName: DirectoryName = spine
 
 /**
  * Obtains the directory containing generated Java source code for the specified source set.
  */
-public fun Project.generatedJavaDir(ss: SourceSetName): Path {
-    return generated(ss).resolve(java)
-}
+public fun Project.generatedJavaDir(ss: SourceSetName): Path =
+    generated(ss).resolve(generatedJavaDirName)
 
 /**
  * Obtains the directory with the generated gRPC code for the specified source set.
  */
-public fun Project.generatedGrpcDir(ss: SourceSetName): Path = generated(ss).resolve(grpc)
+public fun Project.generatedGrpcDir(ss: SourceSetName): Path =
+    generated(ss).resolve(generatedGrpcDirName)
 
 /**
  * Obtains the directory with the rejections source code generated for the specified source set.
  */
-public fun Project.generatedRejectionsDir(ss: SourceSetName): Path = generated(ss).resolve(spine)
+public fun Project.generatedRejectionsDir(ss: SourceSetName): Path =
+    generated(ss).resolve(generatedRejectionsDirName)
+
+private fun Project.generated(ss: SourceSetName): Path {
+    return generatedDir.resolve(ss.value)
+}
 
 private fun Path.resolve(dir: DirectoryName) = this.resolve(dir.value())

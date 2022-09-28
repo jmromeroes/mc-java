@@ -37,3 +37,11 @@ include(
     "mc-java-protodata-params",
     "mc-java-plugin-bundle"
 )
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenLocal()
+        mavenCentral()
+    }
+}
