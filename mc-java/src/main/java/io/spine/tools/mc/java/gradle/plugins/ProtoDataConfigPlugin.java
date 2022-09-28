@@ -119,7 +119,8 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
         ext.optionProviders(DefaultOptionsProvider.class.getName());
         ext.setSubDirs(ImmutableList.of(
                 Projects.getGeneratedJavaDirName().value(),
-                Projects.getGeneratedRejectionsDirName().value()
+                Projects.getGeneratedRejectionsDirName().value(),
+                Projects.getGeneratedGrpcDirName().value()
         ));
 
         var dependencies = target.getDependencies();
