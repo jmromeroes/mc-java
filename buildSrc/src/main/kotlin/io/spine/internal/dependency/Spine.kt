@@ -87,7 +87,7 @@ class Spine(p: ExtensionAware) {
          * We declare ProtoData version here instead of `versions.gradle.kts` because we later use
          * it in a `plugins` section in a build script.
          */
-        const val version = "0.2.8"
+        const val version = "0.2.11"
         const val pluginLib = "io.spine:protodata:$version"
     }
 }

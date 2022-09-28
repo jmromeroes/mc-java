@@ -36,8 +36,8 @@ val serverVersion by extra("2.0.0-SNAPSHOT.100")
  * Keep in mind, the Validation library is tightly connected to ProtoData. For the version
  * of ProtoData, see `buildSrc/src/main/kotlin/io/spine/internal/dependency/Spine.kt`.
  */
-val validationVersion by extra("2.0.0-SNAPSHOT.23")
-val protoDataVersion by extra("0.2.8")
+val validationVersion by extra("2.0.0-SNAPSHOT.24")
+val protoDataVersion by extra("0.2.11")
 
 val mcJavaVersion by extra("2.0.0-SNAPSHOT.98")
 val versionToPublish by extra(mcJavaVersion)
