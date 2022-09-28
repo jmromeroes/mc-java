@@ -79,7 +79,7 @@ publishing {
              *     <dependency>
              *         <groupId>io.spine</groupId>
              *         <artifactId>protodata</artifactId>
-             *         <version>0.2.8</version>
+             *         <version>$protoDataVersion</version>
              *         <scope>runtime</scope>
              *    </dependency>
              * ```
