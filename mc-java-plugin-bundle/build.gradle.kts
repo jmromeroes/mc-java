@@ -81,18 +81,41 @@ publishing {
              *         <artifactId>protodata</artifactId>
              *         <version>$protoDataVersion</version>
              *         <scope>runtime</scope>
+             *         <exclusions>
+             *              <exclusion>
+             *                  <groupId>io.spine.protodata</groupId>
+             *                  <artifactId>*</artifactId>
+             *              </exclusion>
+             *              <exclusion>
+             *                  <groupId>org.jetbrains.kotlin</groupId>
+             *                  <artifactId>*</artifactId>
+             *              </exclusion>
+             *              <exclusion>
+             *                  <groupId>com.google.protobuf</groupId>
+             *                  <artifactId>*</artifactId>
+             *              </exclusion>
+             *              <exclusion>
+             *                  <groupId>io.spine.tools</groupId>
+             *                  <artifactId>*</artifactId>
+             *              </exclusion>
+             *         </exclusions>
              *    </dependency>
              * ```
              */
             pom.withXml {
                 val projectNode: Node = asNode() as Node
-
                 val dependencies = Node(projectNode, "dependencies")
                 val dependency = Node(dependencies, "dependency")
                 Node(dependency, "groupId", "io.spine")
                 Node(dependency, "artifactId", "protodata")
                 Node(dependency, "version", protoDataVersion)
                 Node(dependency, "scope", "runtime")
+
+                val exclusions = Node(dependency, "exclusions")
+                excludeGroupId(exclusions, "io.spine.protodata")
+                excludeGroupId(exclusions, "org.jetbrains.kotlin")
+                excludeGroupId(exclusions, "com.google.protobuf")
+                excludeGroupId(exclusions, "io.spine.tools")
             }
         }
     }
@@ -140,3 +163,9 @@ tasks.shadowDistTar.get().enabled = false
 tasks.shadowDistZip.get().enabled = false
 tasks.distTar.get().enabled = false
 tasks.distZip.get().enabled = false
+
+fun excludeGroupId(exclusions: Node, groupId: String) {
+    val exclusion = Node(exclusions, "exclusion")
+    Node(exclusion, "groupId", groupId)
+    Node(exclusion, "artifactId", "*")
+}

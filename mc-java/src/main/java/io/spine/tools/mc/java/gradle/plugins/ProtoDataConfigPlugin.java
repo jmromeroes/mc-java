@@ -30,12 +30,10 @@ import com.google.common.collect.ImmutableList;
 import io.spine.protodata.gradle.CodegenSettings;
 import io.spine.protodata.gradle.plugin.LaunchProtoData;
 import io.spine.tools.mc.java.gradle.Projects;
-import io.spine.tools.mc.java.protodata.params.DefaultOptionsProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-import static io.spine.tools.mc.java.gradle.Artifacts.mcJavaProtoDataParams;
-import static io.spine.tools.mc.java.gradle.Artifacts.validationJava;
+import static io.spine.tools.mc.java.gradle.Artifacts.validationJavaExtensions;
 import static io.spine.tools.mc.java.gradle.Projects.getMcJava;
 import static java.io.File.separatorChar;
 import static java.lang.String.format;
@@ -94,10 +92,6 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
      * Configures ProtoData with the required Validation library extensions,
      * for the passed Gradle project.
      *
-     * <p>Among other things, includes the {@code mc-java-protodata-params} dependency
-     * into the {@code protoData} configuration classpath. This is required in order to make
-     * the {@link DefaultOptionsProvider} available to the ProtoData runtime.
-     *
      * <p>In case the Validation
      * {@linkplain io.spine.tools.mc.java.gradle.codegen.ValidationConfig#shouldSkipValidation()
      * is disabled}, does nothing.
@@ -116,7 +110,6 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
         ext.plugins(
                 "io.spine.validation.ValidationPlugin"
         );
-        ext.optionProviders(DefaultOptionsProvider.class.getName());
         ext.setSubDirs(ImmutableList.of(
                 Projects.getGeneratedJavaDirName().value(),
                 Projects.getGeneratedRejectionsDirName().value(),
@@ -124,8 +117,7 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
         ));
 
         var dependencies = target.getDependencies();
-        dependencies.add(PROTODATA_CONFIGURATION, validationJava().notation());
-        dependencies.add(PROTODATA_CONFIGURATION, mcJavaProtoDataParams().notation());
+        dependencies.add(PROTODATA_CONFIGURATION, validationJavaExtensions().notation());
     }
 
     private static void linkConfigFile(Project target, LaunchProtoData task,

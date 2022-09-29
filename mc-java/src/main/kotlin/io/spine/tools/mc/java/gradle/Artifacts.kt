@@ -80,35 +80,23 @@ private const val VALIDATION_GROUP = "io.spine.validation"
 private val validationJavaDependency =
     ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java")
 
-private val mcJavaProtoDataParamsDependency =
-    ThirdPartyDependency(SPINE_TOOLS_GROUP, "spine-mc-java-protodata-params")
-
+private val validationJavaExtensionsDependency =
+    ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java-extensions")
 
 private val validationVersion: String by lazy {
     versions.versionOf(validationJavaDependency).orElseThrow()
 }
 
 /**
- * The Maven artifact containing the `spine-validation-java` module.
+ * The Maven artifact containing the `spine-validation-java-extensions:all` module.
  */
-@get:JvmName("validationJava")
-internal val validationJava: Artifact by lazy {
+@get:JvmName("validationJavaExtensions")
+internal val validationJavaExtensions: Artifact by lazy {
     Artifact.newBuilder()
-        .setName(validationJavaDependency.name())
-        .setGroup(validationJavaDependency.groupId())
+        .setName(validationJavaExtensionsDependency.name())
+        .setGroup(validationJavaExtensionsDependency.groupId())
+        .setClassifier(ALL_CLASSIFIER)
         .setVersion(validationVersion)
-        .build()
-}
-
-/**
- * The Maven artifact containing the `spine-mc-java-protodata-params` module.
- */
-@get:JvmName("mcJavaProtoDataParams")
-internal val mcJavaProtoDataParams: Artifact by lazy {
-    Artifact.newBuilder()
-        .setName(mcJavaProtoDataParamsDependency.name())
-        .setGroup(mcJavaProtoDataParamsDependency.groupId())
-        .setVersion(mcJavaVersion)
         .build()
 }
 
