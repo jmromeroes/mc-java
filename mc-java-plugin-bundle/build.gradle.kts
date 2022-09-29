@@ -81,8 +81,6 @@ publishing {
              *         <artifactId>protodata</artifactId>
              *         <version>$protoDataVersion</version>
              *         <scope>runtime</scope>
-             *
-             *
              *         <exclusions>
              *              <exclusion>
              *                  <groupId>io.spine.protodata</groupId>
@@ -106,7 +104,6 @@ publishing {
              */
             pom.withXml {
                 val projectNode: Node = asNode() as Node
-
                 val dependencies = Node(projectNode, "dependencies")
                 val dependency = Node(dependencies, "dependency")
                 Node(dependency, "groupId", "io.spine")
@@ -115,7 +112,6 @@ publishing {
                 Node(dependency, "scope", "runtime")
 
                 val exclusions = Node(dependency, "exclusions")
-
                 excludeGroupId(exclusions, "io.spine.protodata")
                 excludeGroupId(exclusions, "org.jetbrains.kotlin")
                 excludeGroupId(exclusions, "com.google.protobuf")
