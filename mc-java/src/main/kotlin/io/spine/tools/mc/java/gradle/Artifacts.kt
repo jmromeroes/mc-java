@@ -80,21 +80,21 @@ private const val VALIDATION_GROUP = "io.spine.validation"
 private val validationJavaDependency =
     ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java")
 
-private val validationJavaBundleDependency =
-    ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java-bundle")
+private val validationJavaExtensionsDependency =
+    ThirdPartyDependency(VALIDATION_GROUP, "spine-validation-java-extensions")
 
 private val validationVersion: String by lazy {
     versions.versionOf(validationJavaDependency).orElseThrow()
 }
 
 /**
- * The Maven artifact containing the `spine-validation-java-bundle:all` module.
+ * The Maven artifact containing the `spine-validation-java-extensions:all` module.
  */
-@get:JvmName("validationJavaBundle")
-internal val validationJavaBundle: Artifact by lazy {
+@get:JvmName("validationJavaExtensions")
+internal val validationJavaExtensions: Artifact by lazy {
     Artifact.newBuilder()
-        .setName(validationJavaBundleDependency.name())
-        .setGroup(validationJavaBundleDependency.groupId())
+        .setName(validationJavaExtensionsDependency.name())
+        .setGroup(validationJavaExtensionsDependency.groupId())
         .setClassifier(ALL_CLASSIFIER)
         .setVersion(validationVersion)
         .build()

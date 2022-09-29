@@ -33,7 +33,7 @@ import io.spine.tools.mc.java.gradle.Projects;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
-import static io.spine.tools.mc.java.gradle.Artifacts.validationJavaBundle;
+import static io.spine.tools.mc.java.gradle.Artifacts.validationJavaExtensions;
 import static io.spine.tools.mc.java.gradle.Projects.getMcJava;
 import static java.io.File.separatorChar;
 import static java.lang.String.format;
@@ -117,7 +117,7 @@ final class ProtoDataConfigPlugin implements Plugin<Project> {
         ));
 
         var dependencies = target.getDependencies();
-        dependencies.add(PROTODATA_CONFIGURATION, validationJavaBundle().notation());
+        dependencies.add(PROTODATA_CONFIGURATION, validationJavaExtensions().notation());
     }
 
     private static void linkConfigFile(Project target, LaunchProtoData task,
